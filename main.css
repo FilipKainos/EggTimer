@@ -1,30 +1,89 @@
 /* Main stylesheet for EggTimer app */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff9f1c 100%);
   margin: 0;
   padding: 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
+
+/* Falling eggs animation */
+body::before {
+  content: '🥚';
+  position: absolute;
+  top: -50px;
+  left: 10%;
+  font-size: 30px;
+  animation: fall 8s linear infinite;
+  opacity: 0.6;
+}
+
+body::after {
+  content: '🥚';
+  position: absolute;
+  top: -50px;
+  left: 30%;
+  font-size: 25px;
+  animation: fall 10s linear infinite 2s;
+  opacity: 0.5;
+}
+
+@keyframes fall {
+  0% {
+    transform: translateY(-50px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.falling-egg {
+  position: absolute;
+  font-size: 25px;
+  opacity: 0.5;
+  animation: fall 9s linear infinite;
+  pointer-events: none;
+}
+
+.falling-egg:nth-child(1) { left: 15%; animation-duration: 7s; animation-delay: 0s; font-size: 28px; }
+.falling-egg:nth-child(2) { left: 35%; animation-duration: 9s; animation-delay: 1s; font-size: 22px; }
+.falling-egg:nth-child(3) { left: 55%; animation-duration: 8s; animation-delay: 2s; font-size: 30px; }
+.falling-egg:nth-child(4) { left: 75%; animation-duration: 10s; animation-delay: 3s; font-size: 25px; }
+.falling-egg:nth-child(5) { left: 25%; animation-duration: 11s; animation-delay: 4s; font-size: 20px; }
+.falling-egg:nth-child(6) { left: 85%; animation-duration: 7.5s; animation-delay: 1.5s; font-size: 27px; }
 
 #app {
   max-width: 480px;
   width: 90%;
   margin: 20px auto;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 20px;
   box-shadow: 0 20px 60px rgba(0,0,0,0.3);
   padding: 40px;
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(10px);
 }
 
 .timer-container h1 {
   text-align: center;
-  color: #333;
+  color: #ff6b35;
   margin: 0 0 30px 0;
   font-size: 2.5em;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 .preset-buttons {
@@ -44,16 +103,23 @@ body {
 
 .custom-time-input label {
   font-weight: 600;
-  color: #555;
+  color: #ff6b35;
 }
 
 .custom-time-input input {
   flex: 1;
   min-width: 80px;
   padding: 10px;
-  border: 2px solid #ddd;
+  border: 2px solid #ff9f1c;
   border-radius: 8px;
   font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.custom-time-input input:focus {
+  outline: none;
+  border-color: #ff6b35;
+  box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
 }
 
 .timer-display-container {
@@ -63,9 +129,10 @@ body {
 .timer-display {
   font-size: 4em;
   font-weight: bold;
-  color: #667eea;
+  color: #ff6b35;
   margin: 30px 0;
   font-variant-numeric: tabular-nums;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 .timer-controls {
@@ -96,32 +163,33 @@ body {
 }
 
 .btn-primary {
-  background: #667eea;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
   color: white;
 }
 
 .btn-primary:hover {
-  background: #5568d3;
+  background: linear-gradient(135deg, #ff5722 0%, #ff8c00 100%);
 }
 
 .btn-secondary {
-  background: #6c757d;
+  background: linear-gradient(135deg, #ff9f1c 0%, #ffb347 100%);
   color: white;
 }
 
 .btn-secondary:hover {
-  background: #5a6268;
+  background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
 }
 
 .btn-preset {
   flex: 1;
   min-width: 140px;
-  background: #f8f9fa;
-  color: #333;
-  border: 2px solid #667eea;
+  background: rgba(255, 255, 255, 0.9);
+  color: #ff6b35;
+  border: 2px solid #ff9f1c;
 }
 
 .btn-preset:hover {
-  background: #667eea;
+  background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
   color: white;
+  border-color: #ff6b35;
 }
