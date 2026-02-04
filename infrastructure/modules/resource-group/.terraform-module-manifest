@@ -1,0 +1,32 @@
+# Terraform Module Manifest
+# Resource Group Module
+
+This module is designed to be reusable and follows HashiCorp Terraform best practices.
+
+## Module Metadata
+- Name: resource-group
+- Version: 1.0
+- Provider: azurerm ~> 3.0
+- Purpose: Create Azure Resource Groups with consistent tagging
+
+## Usage
+source = "./modules/resource-group"
+
+## Files
+- main.tf: Azure Resource Group resource definition
+- variables.tf: Input variables with validation
+- outputs.tf: Exported resource properties
+- README.md: Full documentation
+
+## Required Inputs
+- resource_group_name: string
+- location: string
+
+## Optional Inputs
+- tags: map(string)
+
+## Outputs
+- resource_group_name: The created resource group name
+- resource_group_id: The full resource group ID
+- location: The resource group location
+- tags: All applied tags
